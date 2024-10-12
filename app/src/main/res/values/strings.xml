@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GasBill</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_logo">App Logo</string>
+    <string name="_0_0">0/0</string>
+</resources>

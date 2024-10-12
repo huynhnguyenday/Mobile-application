@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WhiteIconsSearchViewTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="android:actionMenuTextColor">#FFFFFF</item>
+    </style>
+</resources>

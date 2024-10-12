@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <!-- Main content layout with ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Logo Image -->
+            <ImageView
+                android:id="@+id/logo_image"
+                android:layout_width="312dp"
+                android:layout_height="293dp"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@string/app_logo"
+                android:src="@drawable/logogas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Button for Enter Invoice -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_enter_invoice"
+                android:layout_width="0dp"
+                android:layout_height="145dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/card_customer_detail"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo_image"
+                app:layout_constraintWidth_percent="0.45">
+
+                <Button
+                    android:id="@+id/btn_enter_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_bill"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Enter Invoice"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Button for Customer Detail -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_customer_detail"
+                android:layout_width="0dp"
+                android:layout_height="145dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/card_enter_invoice"
+                app:layout_constraintTop_toBottomOf="@id/logo_image"
+                app:layout_constraintWidth_percent="0.45">
+
+                <Button
+                    android:id="@+id/btn_customer_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_home"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Customer Detail"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Button for Change Unit -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_change_unit"
+                android:layout_width="0dp"
+                android:layout_height="145dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/card_settings"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_enter_invoice"
+                app:layout_constraintWidth_percent="0.45">
+
+                <Button
+                    android:id="@+id/btn_change_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_change"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Change Unit"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Button for Settings -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_settings"
+                android:layout_width="0dp"
+                android:layout_height="145dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/card_change_unit"
+                app:layout_constraintTop_toBottomOf="@+id/card_customer_detail"
+                app:layout_constraintWidth_percent="0.45">
+
+                <Button
+                    android:id="@+id/btn_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_settings"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Settings"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

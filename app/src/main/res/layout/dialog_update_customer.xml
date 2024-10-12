@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edit_customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Customer Name"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_customer_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Customer Address"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_customer_used_num_gas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Used Num Gas"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_customer_gas_level_type_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gas Level Type ID"
+        android:inputType="number"
+        android:minHeight="48dp" />
+</LinearLayout>
