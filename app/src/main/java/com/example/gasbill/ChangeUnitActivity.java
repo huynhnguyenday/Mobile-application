@@ -203,6 +203,4 @@ public class ChangeUnitActivity extends BaseActivity {
         notificationDialog.show();
     }
 
-
-
 }

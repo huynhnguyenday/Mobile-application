@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivityView extends AppCompatActivity {
@@ -12,6 +13,9 @@ public class MainActivityView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);  // Set the main view layout
+
+        Intent musicIntent = new Intent(MainActivityView.this, MusicService.class);
+        startService(musicIntent);
 
         // Set up button listeners
         Button btnEnterInvoice = findViewById(R.id.btn_enter_invoice);

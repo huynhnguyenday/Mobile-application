@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -26,9 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.SearchView;
-
 import com.google.android.material.navigation.NavigationView;
-
 import java.text.DecimalFormat;
 
 public class CustomerDetailsActivity extends BaseActivity {
@@ -266,10 +263,10 @@ public class CustomerDetailsActivity extends BaseActivity {
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             displayCustomerDetails();
-            calculateAndDisplayPrice(); // Tính toán và hiển thị giá khi hiển thị thông tin khách hàng
+            calculateAndDisplayPrice();
         } else {
             Toast.makeText(this, "No customers found", Toast.LENGTH_SHORT).show();
-            finish(); // Đóng activity nếu không có dữ liệu
+            finish();
         }
 
         TextView tvResultsCount = findViewById(R.id.tv_results_count);
@@ -490,14 +487,14 @@ public class CustomerDetailsActivity extends BaseActivity {
 
     private void updateCustomerDetails(String name, String address, double usedNumGas, int gasLevelTypeId) {
         int customerId = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
-        String yyyymm = tvCustomerYYYYMM.getText().toString().replace("Date: ", ""); // Thay thế "YYYYMM: " bằng "Date: "
+        String yyyymm = tvCustomerYYYYMM.getText().toString().replace("Date: ", "");
 
         dbHelper.updateCustomer(customerId, name, yyyymm, address, usedNumGas, gasLevelTypeId);
 
         // Cập nhật lại hiển thị sau khi cập nhật
         cursor = dbHelper.getAllCustomers();
-        cursor.moveToPosition(currentPosition); // Đặt cursor về vị trí hiện tại
-        displayCustomerDetails(); // Hiển thị lại thông tin
+        cursor.moveToPosition(currentPosition);
+        displayCustomerDetails();
     }
 
 
@@ -533,30 +530,18 @@ public class CustomerDetailsActivity extends BaseActivity {
 
             // Hiển thị Address, hoặc "***" nếu bị ẩn
             if (addressIndex != -1) {
-                if (showAddress) {
-                    tvCustomerAddress.setText("Address: " + cursor.getString(addressIndex));
-                } else {
-                    tvCustomerAddress.setText("Address: ***");
-                }
+                tvCustomerAddress.setText("Address: " + cursor.getString(addressIndex));
             }
 
             // Hiển thị Used Num Gas, tính toán giá, hoặc "***" nếu bị ẩn
             if (usedNumGasIndex != -1) {
                 double usedNumGas = cursor.getDouble(usedNumGasIndex);
-                if (showUsedNumGas) {
-                    tvCustomerUsedNumGas.setText("Used Num Gas: " + usedNumGas);
-                } else {
-                    tvCustomerUsedNumGas.setText("Used Num Gas: ***");
-                }
+                tvCustomerUsedNumGas.setText("Used Num Gas: " + usedNumGas);
             }
 
             // Hiển thị Gas Level Type ID, hoặc "***" nếu bị ẩn
             if (gasLevelTypeIdIndex != -1) {
-                if (showGasLevelTypeName) {
-                    tvCustomerGasLevelTypeID.setText("Gas Level: " + cursor.getInt(gasLevelTypeIdIndex));
-                } else {
-                    tvCustomerGasLevelTypeID.setText("Gas Level: ***");
-                }
+                tvCustomerGasLevelTypeID.setText("Gas Level: " + cursor.getInt(gasLevelTypeIdIndex));
             }
 
             calculateAndDisplayPrice(); // Tính toán và hiển thị giá khi hiển thị thông tin khách hàng
@@ -633,8 +618,6 @@ public class CustomerDetailsActivity extends BaseActivity {
             tvResultsCount.setText("0/0"); // Không có kết quả
         }
     }
-
-
 
     @Override
     protected void onDestroy() {

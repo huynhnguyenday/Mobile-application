@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <service android:name=".MusicService" />
+        <service android:name=".MusicService"
+            android:foregroundServiceType="mediaPlayback" />
         <activity android:name=".MyApplication" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".CustomerDetailsActivity" />

@@ -38,6 +38,9 @@ dependencies {
     // Thêm các thư viện khác nếu cần
     implementation ("androidx.appcompat:appcompat:1.3.0")
     implementation ("com.google.android.material:material:1.4.0")
+
+    implementation ("androidx.lifecycle:lifecycle-process:2.5.1")
+    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

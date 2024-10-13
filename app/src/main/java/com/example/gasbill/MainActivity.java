@@ -2,6 +2,7 @@ package com.example.gasbill;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +39,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Get the saved state of the music
+        SharedPreferences preferences = getSharedPreferences("SettingsPrefs", MODE_PRIVATE);
+        boolean isMusicPlaying = preferences.getBoolean("music_playing", true); // Default to true
 
+        // Start music service only if music was previously playing
+        if (isMusicPlaying) {
+            Intent serviceIntent = new Intent(this, MusicService.class);
+            startService(serviceIntent);
+        }
         // Khởi tạo Toolbar và thiết lập như ActionBar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
