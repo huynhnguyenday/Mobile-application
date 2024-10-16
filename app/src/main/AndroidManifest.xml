@@ -29,7 +29,6 @@
         <activity android:name=".MyApplication" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".CustomerDetailsActivity" />
-
     </application>
 
 </manifest>

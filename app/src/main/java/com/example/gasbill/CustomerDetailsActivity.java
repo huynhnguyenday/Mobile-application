@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -27,6 +29,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.SearchView;
 import com.google.android.material.navigation.NavigationView;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDetailsActivity extends BaseActivity {
 
@@ -391,14 +395,14 @@ public class CustomerDetailsActivity extends BaseActivity {
         // Create a LinearLayout for the dialog's title
         LinearLayout titleLayout = new LinearLayout(this);
         titleLayout.setOrientation(LinearLayout.VERTICAL);
-        titleLayout.setGravity(Gravity.CENTER); // Center the title
-        titleLayout.setPadding(16, 16, 16, 16); // Padding for the title
+        titleLayout.setGravity(Gravity.CENTER);
+        titleLayout.setPadding(16, 16, 16, 16);
 
         // Create a TextView for the title
         TextView titleTextView = new TextView(this);
         titleTextView.setText("Update Customer Details");
-        titleTextView.setTextSize(20); // Set the text size
-        titleTextView.setGravity(Gravity.CENTER); // Center the title text
+        titleTextView.setTextSize(20);
+        titleTextView.setGravity(Gravity.CENTER);
         titleTextView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -413,54 +417,84 @@ public class CustomerDetailsActivity extends BaseActivity {
         // Create a LinearLayout to hold the TextViews and EditTexts
         LinearLayout dialogView = new LinearLayout(this);
         dialogView.setOrientation(LinearLayout.VERTICAL);
-        dialogView.setPadding(16, 16, 16, 16); // Padding for LinearLayout
+        dialogView.setPadding(16, 16, 16, 16);
 
         // Create the EditTexts
         EditText editTextName = new EditText(this);
         EditText editTextAddress = new EditText(this);
         EditText editTextUsedNumGas = new EditText(this);
-        EditText editTextGasLevelTypeId = new EditText(this);
+
+        // Create a Spinner for gas level type
+        Spinner spinnerGasLevelType = new Spinner(this);
+
+// Create a list for the gas level types
+        List<String> gasLevelTypes = new ArrayList<>();
+        gasLevelTypes.add("1");
+        gasLevelTypes.add("2");
+
+// Create an ArrayAdapter for the Spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, gasLevelTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGasLevelType.setAdapter(adapter);
+
+// Tăng kích thước chữ cho Spinner
+        spinnerGasLevelType.setMinimumHeight(100); // Tăng chiều cao để dễ dàng chọn
+        TextView spinnerTextView = (TextView) spinnerGasLevelType.getSelectedView();
+        if (spinnerTextView != null) {
+            spinnerTextView.setTextSize(24); // Đặt kích thước chữ
+        }
+
 
         // Set properties for the EditTexts
         editTextName.setHint("Enter customer name");
         editTextAddress.setHint("Enter customer address");
         editTextUsedNumGas.setHint("Enter used number of gas");
-        editTextGasLevelTypeId.setHint("Enter gas level");
 
-        // Create and add TextViews to the LinearLayout
-        TextView textViewName = new TextView(this);
-        textViewName.setText("Name");
-        textViewName.setTextSize(20); // Increase text size
-        textViewName.setPadding(15, 20, 0, 10); // Add padding top
-        dialogView.addView(textViewName);
-        dialogView.addView(editTextName);
+        // Create and add TextViews and EditTexts to the LinearLayout
+        addTextView(dialogView, "Name", editTextName);
+        addTextView(dialogView, "Address", editTextAddress);
+        addTextView(dialogView, "Used Num Gas", editTextUsedNumGas);
 
-        TextView textViewAddress = new TextView(this);
-        textViewAddress.setText("Address");
-        textViewAddress.setTextSize(20); // Increase text size
-        textViewAddress.setPadding(15, 20, 0, 10); // Add padding top
-        dialogView.addView(textViewAddress);
-        dialogView.addView(editTextAddress);
+        // Add a TextView for "Gas Level"
+        TextView gasLevelTitleTextView = new TextView(this);
+        gasLevelTitleTextView.setText("Gas Level");
+        gasLevelTitleTextView.setTextSize(20); // Tăng kích cỡ chữ lên 20
+        gasLevelTitleTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        int paddingTop = 16;
+        int paddingLeft = 16;
+        gasLevelTitleTextView.setPadding(paddingLeft, paddingTop,
+                gasLevelTitleTextView.getPaddingRight(), gasLevelTitleTextView.getPaddingBottom());
 
-        TextView textViewUsedNumGas = new TextView(this);
-        textViewUsedNumGas.setText("Used Num Gas");
-        textViewUsedNumGas.setTextSize(20); // Increase text size
-        textViewUsedNumGas.setPadding(15, 20, 0, 10); // Add padding top
-        dialogView.addView(textViewUsedNumGas);
-        dialogView.addView(editTextUsedNumGas);
+        dialogView.addView(gasLevelTitleTextView);
 
-        TextView textViewGasLevelTypeId = new TextView(this);
-        textViewGasLevelTypeId.setText("Gas Level");
-        textViewGasLevelTypeId.setTextSize(20); // Increase text size
-        textViewGasLevelTypeId.setPadding(15, 20, 0, 10); // Add padding top
-        dialogView.addView(textViewGasLevelTypeId);
-        dialogView.addView(editTextGasLevelTypeId);
+        // Add the Spinner without label
+        dialogView.addView(spinnerGasLevelType);
 
-        // Set the text for the EditTexts from the TextViews
-        editTextName.setText(tvCustomerName.getText().toString().replace("Name: ", ""));
-        editTextAddress.setText(tvCustomerAddress.getText().toString().replace("Address: ", ""));
-        editTextUsedNumGas.setText(tvCustomerUsedNumGas.getText().toString().replace("Used Num Gas: ", ""));
-        editTextGasLevelTypeId.setText(tvCustomerGasLevelTypeID.getText().toString().replace("Gas Level: ", ""));
+        // Fetch and set the customer details from the cursor safely
+        if (cursor != null && cursor.moveToPosition(currentPosition)) {
+            int nameIndex = cursor.getColumnIndex("NAME");
+            int addressIndex = cursor.getColumnIndex("ADDRESS");
+            int usedNumGasIndex = cursor.getColumnIndex("USED_NUM_GAS");
+            int gasLevelTypeIdIndex = cursor.getColumnIndex("GAS_LEVEL_TYPE_ID");
+
+            if (nameIndex != -1) {
+                editTextName.setText(cursor.getString(nameIndex));
+            }
+            if (addressIndex != -1) {
+                editTextAddress.setText(cursor.getString(addressIndex));
+            }
+            if (usedNumGasIndex != -1) {
+                editTextUsedNumGas.setText(String.valueOf(cursor.getDouble(usedNumGasIndex)));
+            }
+            if (gasLevelTypeIdIndex != -1) {
+                int gasLevelTypeId = cursor.getInt(gasLevelTypeIdIndex);
+                spinnerGasLevelType.setSelection(gasLevelTypeId - 1); // Adjust for zero-based index
+            }
+        }
 
         // Add the LinearLayout to the ScrollView
         scrollView.addView(dialogView);
@@ -474,27 +508,63 @@ public class CustomerDetailsActivity extends BaseActivity {
         // Set the main layout as the dialog view
         builder.setView(mainLayout);
 
-        builder.setPositiveButton("Update", (dialog, which) -> updateCustomerDetails(
-                editTextName.getText().toString(),
-                editTextAddress.getText().toString(),
-                Double.parseDouble(editTextUsedNumGas.getText().toString()),
-                Integer.parseInt(editTextGasLevelTypeId.getText().toString())
-        ));
+        builder.setPositiveButton("Update", (dialog, which) -> {
+            String selectedGasLevelType = spinnerGasLevelType.getSelectedItem().toString();
+            int gasLevelTypeId = selectedGasLevelType.equals("1") ? 1 : 2;
+
+            updateCustomerDetails(
+                    editTextName.getText().toString(),
+                    editTextAddress.getText().toString(),
+                    Double.parseDouble(editTextUsedNumGas.getText().toString()),
+                    gasLevelTypeId
+            );
+        });
 
         builder.setNegativeButton("Cancel", null);
         builder.show();
     }
 
+
+
+    // Updated method to add a Spinner to the LinearLayout with same structure as Used Num Gas
+    private void addSpinner(LinearLayout layout, String label, Spinner spinner) {
+        // Create a TextView for the label
+        TextView textView = new TextView(this);
+        textView.setText(label);
+        // Set any additional properties to match the structure of "Used Num Gas"
+        textView.setTextSize(16); // Adjust the text size as needed
+        textView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+
+        // Add the TextView and Spinner to the layout
+        layout.addView(textView);
+        layout.addView(spinner);
+    }
+
+
+    // Helper method to add TextViews and EditTexts to the layout
+    private void addTextView(LinearLayout layout, String label, EditText editText) {
+        TextView textView = new TextView(this);
+        textView.setText(label);
+        textView.setTextSize(20);
+        textView.setPadding(15, 20, 0, 10);
+        layout.addView(textView);
+        layout.addView(editText);
+    }
+
+
     private void updateCustomerDetails(String name, String address, double usedNumGas, int gasLevelTypeId) {
         int customerId = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
-        String yyyymm = tvCustomerYYYYMM.getText().toString().replace("Date: ", "");
+        String yyyymm = tvCustomerYYYYMM.getText().toString().replace("Date: ", ""); // Thay thế "YYYYMM: " bằng "Date: "
 
         dbHelper.updateCustomer(customerId, name, yyyymm, address, usedNumGas, gasLevelTypeId);
 
         // Cập nhật lại hiển thị sau khi cập nhật
         cursor = dbHelper.getAllCustomers();
-        cursor.moveToPosition(currentPosition);
-        displayCustomerDetails();
+        cursor.moveToPosition(currentPosition); // Đặt cursor về vị trí hiện tại
+        displayCustomerDetails(); // Hiển thị lại thông tin
     }
 
 
@@ -530,18 +600,30 @@ public class CustomerDetailsActivity extends BaseActivity {
 
             // Hiển thị Address, hoặc "***" nếu bị ẩn
             if (addressIndex != -1) {
-                tvCustomerAddress.setText("Address: " + cursor.getString(addressIndex));
+                if (showAddress) {
+                    tvCustomerAddress.setText("Address: " + cursor.getString(addressIndex));
+                } else {
+                    tvCustomerAddress.setText("Address: ***");
+                }
             }
 
             // Hiển thị Used Num Gas, tính toán giá, hoặc "***" nếu bị ẩn
             if (usedNumGasIndex != -1) {
                 double usedNumGas = cursor.getDouble(usedNumGasIndex);
-                tvCustomerUsedNumGas.setText("Used Num Gas: " + usedNumGas);
+                if (showUsedNumGas) {
+                    tvCustomerUsedNumGas.setText("Used Num Gas: " + usedNumGas);
+                } else {
+                    tvCustomerUsedNumGas.setText("Used Num Gas: ***");
+                }
             }
 
             // Hiển thị Gas Level Type ID, hoặc "***" nếu bị ẩn
             if (gasLevelTypeIdIndex != -1) {
-                tvCustomerGasLevelTypeID.setText("Gas Level: " + cursor.getInt(gasLevelTypeIdIndex));
+                if (showGasLevelTypeName) {
+                    tvCustomerGasLevelTypeID.setText("Gas Level: " + cursor.getInt(gasLevelTypeIdIndex));
+                } else {
+                    tvCustomerGasLevelTypeID.setText("Gas Level: ***");
+                }
             }
 
             calculateAndDisplayPrice(); // Tính toán và hiển thị giá khi hiển thị thông tin khách hàng
