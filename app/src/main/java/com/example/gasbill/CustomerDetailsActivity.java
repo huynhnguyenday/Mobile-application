@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -407,6 +408,9 @@ public class CustomerDetailsActivity extends BaseActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
+
+        titleTextView.setTypeface(null, Typeface.BOLD); // Thiết lập kiểu chữ là đậm
+
 
         // Add the title TextView to the title layout
         titleLayout.addView(titleTextView);
